@@ -24,3 +24,8 @@ alias hidefiles='defaults write com.apple.finder AppleShowAllFiles NO; killall F
 if [ -f ~/.bashrc ]; then
     source ~/.bashrc
 fi
+
+# ===== macOS System Preferences =====
+# Set keyboard repeat rate to fast (like Windows)
+defaults write -g KeyRepeat -int 2
+defaults write -g InitialKeyRepeat -int 15
