@@ -33,7 +33,7 @@ Personal shell configuration for macOS, Linux, and WSL.
 
 ```bash
 # Clone this repo
-git clone https://github.com/YOUR_USERNAME/dotfiles.git ~/dotfiles
+git clone https://github.com/robch/dotfiles.git ~/dotfiles
 
 # Run the installer
 ~/dotfiles/install.sh
@@ -215,15 +215,6 @@ This is my personal config, but if you spot a bug or have a cool suggestion, fee
 ## 📄 License
 
 MIT - Feel free to fork and adapt for your own use!
-
----
-
-## 🙏 Inspiration
-
-Thanks to the dotfiles community:
-- https://dotfiles.github.io/
-- Mathias Bynens: https://github.com/mathiasbynens/dotfiles
-- Paul Irish: https://github.com/paulirish/dotfiles
 
 ---
 
