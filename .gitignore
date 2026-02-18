@@ -1,0 +1,25 @@
+# Local/private configuration (not committed)
+.bashrc.local
+.bash_profile.local
+*.local
+
+# Secrets and sensitive data
+.env
+.secrets
+*.key
+*.pem
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Editor files
+*.swp
+*.swo
+*~
+.vscode/
+.idea/
+
+# Backup files
+*.backup
+*.bak
