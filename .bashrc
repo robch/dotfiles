@@ -43,9 +43,9 @@ alias h='history'
 alias grep='grep --color=auto'
 
 # ===== Config Management =====
-alias editbash='nano ~/.bashrc'
-alias editbashrc='nano ~/.bashrc'
-alias editprofile='nano ~/.bash_profile'
+alias editbash='code ~/.bashrc'
+alias editbashrc='code ~/.bashrc'
+alias editprofile='code ~/.bash_profile'
 alias reloadbash='source ~/.bash_profile'
 
 # ===== Load Local/Private Configuration =====
