@@ -33,6 +33,8 @@ alias ....='cd ../../..'
 
 # Common typo fix
 alias cd..='cd ..'
+alias cd...='cd ../..'
+alias cd....='cd ../../..'
 
 # ===== Safety Nets =====
 # Prompt before overwriting
