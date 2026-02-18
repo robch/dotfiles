@@ -31,6 +31,9 @@ alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
 
+# Common typo fix
+alias cd..='cd ..'
+
 # ===== Safety Nets =====
 # Prompt before overwriting
 alias cp='cp -i'
