@@ -24,7 +24,7 @@ gl() { git log "$@"; }
 alias ll='ls -lh'           # Long format, human-readable sizes
 alias la='ls -lah'          # Long format, including hidden files
 alias l='ls -CF'            # Columnar format with file type indicators
-alias llt='ls -lht'         # Long format, sorted by time (newest first)
+alias llt='ls -lhtr'        # Long format, sorted by time (newest last)
 
 # ===== Navigation Shortcuts =====
 alias ..='cd ..'
@@ -52,6 +52,18 @@ alias editbash='code ~/.bashrc'
 alias editbashrc='code ~/.bashrc'
 alias editprofile='code ~/.bash_profile'
 alias reloadbash='source ~/.bash_profile'
+
+# === Cycod Path Configuration (Auto-generated) ===
+# Generated on Wed Feb 18 09:14:56 PST 2026
+# Prioritizes debug builds of cycod tools
+export PATH="/Users/r/src/cycod/src/cycod/bin/Debug/net9.0:/Users/r/src/cycod/src/cycodt/bin/Debug/net9.0:/Users/r/src/cycod/src/cycodmd/bin/Debug/net9.0:/Users/r/src/cycod/src/cycodj/bin/Debug/net9.0:/Users/r/src/cycod/src/cycodgr/bin/Debug/net9.0:/Users/r/src/cycod/src/mcp/geolocation/bin/Debug/net9.0:/Users/r/src/cycod/src/mcp/mxlookup/bin/Debug/net9.0:/Users/r/src/cycod/src/mcp/osm/bin/Debug/net9.0:/Users/r/src/cycod/src/mcp/weather/bin/Debug/net9.0:/Users/r/src/cycod/src/mcp/whois/bin/Debug/net9.0:$PATH"
+# === End Cycod Path Configuration ===
+
+# ===== Snapshot Workflow (back/diff) =====
+# back - Create numbered snapshots for exploratory development
+# diff - Compare current code vs latest snapshot using Beyond Compare
+source ~/src/dotfiles/functions/_fns4_back_and_diff.sh
+
 
 # ===== Load Local/Private Configuration =====
 # Put machine-specific, private, or work-related config in ~/.bashrc.local

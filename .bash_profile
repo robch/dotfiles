@@ -1,4 +1,4 @@
-∫# ~/.bash_profile
+# ~/.bash_profile
 # macOS-specific bash configuration
 # This file is read by login shells (macOS Terminal, iTerm2, SSH, etc.)
 
