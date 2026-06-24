@@ -1,6 +1,6 @@
 # ~/.bashrc
-# Portable bash configuration - works on macOS, Linux, any terminal
-# This file is sourced by ~/.bash_profile on macOS
+# Portable bash configuration - works on macOS, Linux, WSL, and Git Bash
+# This file is sourced by ~/.bash_profile on login shells.
 
 # ===== Prompt =====
 export PS1='\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
@@ -10,7 +10,7 @@ export PS1='\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
 export PATH="$PATH:$HOME/.dotnet/tools"
 
 # ===== Git Functions =====
-gw() { 
+gw() {
   if [ $# -eq 0 ]; then
     git worktree list
   else
@@ -51,19 +51,38 @@ alias grep='grep --color=auto'
 alias editbash='code ~/.bashrc'
 alias editbashrc='code ~/.bashrc'
 alias editprofile='code ~/.bash_profile'
-alias reloadbash='source ~/.bash_profile'
+alias reloadbash='source ~/.bashrc'
 
-# === Cycod Path Configuration (Auto-generated) ===
-# Generated on Wed Feb 18 09:14:56 PST 2026
-# Prioritizes debug builds of cycod tools
-export PATH="/Users/r/src/cycod/src/cycod/bin/Debug/net9.0:/Users/r/src/cycod/src/cycodt/bin/Debug/net9.0:/Users/r/src/cycod/src/cycodmd/bin/Debug/net9.0:/Users/r/src/cycod/src/cycodj/bin/Debug/net9.0:/Users/r/src/cycod/src/cycodgr/bin/Debug/net9.0:/Users/r/src/cycod/src/mcp/geolocation/bin/Debug/net9.0:/Users/r/src/cycod/src/mcp/mxlookup/bin/Debug/net9.0:/Users/r/src/cycod/src/mcp/osm/bin/Debug/net9.0:/Users/r/src/cycod/src/mcp/weather/bin/Debug/net9.0:/Users/r/src/cycod/src/mcp/whois/bin/Debug/net9.0:$PATH"
-# === End Cycod Path Configuration ===
+# ===== Load shared helper functions =====
+# Prefer the repo copy, but fall back to common clone locations.
+if [ -z "${DOTFILES_DIR:-}" ]; then
+    for candidate in \
+        "$HOME/dotfiles" \
+        "$HOME/src/dotfiles" \
+        "$HOME/src/.r/dotfiles" \
+        "/c/src/dotfiles" \
+        "/c/src/.r/dotfiles"; do
+        if [ -f "$candidate/functions/_fns4_back_and_diff.sh" ]; then
+            DOTFILES_DIR="$candidate"
+            break
+        fi
+    done
+fi
 
-# ===== Snapshot Workflow (back/diff) =====
-# back - Create numbered snapshots for exploratory development
-# diff - Compare current code vs latest snapshot using Beyond Compare
-source ~/src/dotfiles/functions/_fns4_back_and_diff.sh
+if [ -n "${DOTFILES_DIR:-}" ] && [ -f "$DOTFILES_DIR/functions/_fns4_back_and_diff.sh" ]; then
+    source "$DOTFILES_DIR/functions/_fns4_back_and_diff.sh"
+fi
 
+if [ -n "${DOTFILES_DIR:-}" ] && [ -f "$DOTFILES_DIR/functions/_fns4_cycod.sh" ]; then
+    source "$DOTFILES_DIR/functions/_fns4_cycod.sh"
+fi
+
+# ===== Machine-specific overrides =====
+# Keep machine-local settings in committed files so the setup can travel
+# across shells, operating systems, and future machines.
+if [ -n "${DOTFILES_DIR:-}" ] && [ -f "$DOTFILES_DIR/machines/$(hostname 2>/dev/null)/bashrc.local" ]; then
+    source "$DOTFILES_DIR/machines/$(hostname 2>/dev/null)/bashrc.local"
+fi
 
 # ===== Load Local/Private Configuration =====
 # Put machine-specific, private, or work-related config in ~/.bashrc.local
