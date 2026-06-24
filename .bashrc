@@ -54,26 +54,17 @@ alias editprofile='code ~/.bash_profile'
 alias reloadbash='source ~/.bashrc'
 
 # ===== Load shared helper functions =====
-# Prefer the repo copy, but fall back to common clone locations.
+# Resolve the repo root from this file's location when DOTFILES_DIR is unset.
 if [ -z "${DOTFILES_DIR:-}" ]; then
-    for candidate in \
-        "$HOME/dotfiles" \
-        "$HOME/src/dotfiles" \
-        "$HOME/src/.r/dotfiles" \
-        "/c/src/dotfiles" \
-        "/c/src/.r/dotfiles"; do
-        if [ -f "$candidate/functions/_fns4_back_and_diff.sh" ]; then
-            DOTFILES_DIR="$candidate"
-            break
-        fi
-    done
+    _dotfiles_source="${BASH_SOURCE[0]}"
+    DOTFILES_DIR="$(cd "$(dirname "$_dotfiles_source")" && pwd)"
 fi
 
-if [ -n "${DOTFILES_DIR:-}" ] && [ -f "$DOTFILES_DIR/functions/_fns4_back_and_diff.sh" ]; then
+if [ -f "$DOTFILES_DIR/functions/_fns4_back_and_diff.sh" ]; then
     source "$DOTFILES_DIR/functions/_fns4_back_and_diff.sh"
 fi
 
-if [ -n "${DOTFILES_DIR:-}" ] && [ -f "$DOTFILES_DIR/functions/_fns4_cycod.sh" ]; then
+if [ -f "$DOTFILES_DIR/functions/_fns4_cycod.sh" ]; then
     source "$DOTFILES_DIR/functions/_fns4_cycod.sh"
 fi
 
