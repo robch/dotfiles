@@ -26,29 +26,30 @@ alias ll='ls -lh'           # Long format, human-readable sizes
 alias la='ls -lah'          # Long format, including hidden files
 alias l='ls -CF'            # Columnar format with file type indicators
 alias llt='ls -lhtr'        # Long format, sorted by time (newest last)
-alias dan='ls -lh'          # Directories all by name (default sort)
-alias da='ls -lhtr'         # Directories all by date (newest last)
+unalias dan da 2>/dev/null  # Remove stale aliases from older versions of this file
+dan() { ls -lh "$@" | grep '^d'; }    # Folders only, by name (default sort)
+da() { ls -lhtr "$@" | grep '^d'; }   # Folders only, by date (newest last)
 
 # Current month shortcut (update monthly)
-alias d='d5'                # Current month: May (update each month)
-alias dn='d5n'              # Current month by name
+alias d='d7'                # Current month: July (update each month)
+alias dn='d7n'              # Current month by name
 
-# Month-filtered listings (shows current month + previous month)
+# Month-filtered listings (shows current month + previous month), folders only
 # dx = sorted by date (newest last), dxn = sorted by name
-d1() { ls -lhtr "$@" | grep -E '(Jan|Dec)'; }
-d1n() { ls -lh "$@" | grep -E '(Jan|Dec)'; }
-d2() { ls -lhtr "$@" | grep -E '(Feb|Jan)'; }
-d2n() { ls -lh "$@" | grep -E '(Feb|Jan)'; }
-d3() { ls -lhtr "$@" | grep -E '(Mar|Feb)'; }
-d3n() { ls -lh "$@" | grep -E '(Mar|Feb)'; }
-d4() { ls -lhtr "$@" | grep -E '(Apr|Mar)'; }
-d4n() { ls -lh "$@" | grep -E '(Apr|Mar)'; }
-d5() { ls -lhtr "$@" | grep -E '(May|Apr)'; }
-d5n() { ls -lh "$@" | grep -E '(May|Apr)'; }
-d6() { ls -lhtr "$@" | grep -E '(Jun|May)'; }
-d6n() { ls -lh "$@" | grep -E '(Jun|May)'; }
-d7() { ls -lhtr "$@" | grep -E '(Jul|Jun)'; }
-d7n() { ls -lh "$@" | grep -E '(Jul|Jun)'; }
+d1() { ls -lhtr "$@" | grep '^d' | grep -E '(Jan|Dec)'; }
+d1n() { ls -lh "$@" | grep '^d' | grep -E '(Jan|Dec)'; }
+d2() { ls -lhtr "$@" | grep '^d' | grep -E '(Feb|Jan)'; }
+d2n() { ls -lh "$@" | grep '^d' | grep -E '(Feb|Jan)'; }
+d3() { ls -lhtr "$@" | grep '^d' | grep -E '(Mar|Feb)'; }
+d3n() { ls -lh "$@" | grep '^d' | grep -E '(Mar|Feb)'; }
+d4() { ls -lhtr "$@" | grep '^d' | grep -E '(Apr|Mar)'; }
+d4n() { ls -lh "$@" | grep '^d' | grep -E '(Apr|Mar)'; }
+d5() { ls -lhtr "$@" | grep '^d' | grep -E '(May|Apr)'; }
+d5n() { ls -lh "$@" | grep '^d' | grep -E '(May|Apr)'; }
+d6() { ls -lhtr "$@" | grep '^d' | grep -E '(Jun|May)'; }
+d6n() { ls -lh "$@" | grep '^d' | grep -E '(Jun|May)'; }
+d7() { ls -lhtr "$@" | grep '^d' | grep -E '(Jul|Jun)'; }
+d7n() { ls -lh "$@" | grep '^d' | grep -E '(Jul|Jun)'; }
 
 # ===== Navigation Shortcuts =====
 alias ..='cd ..'
