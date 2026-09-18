@@ -6,6 +6,11 @@
 export PS1='\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
 
 # ===== PATH Additions =====
+# ===== px debug build =====
+PX_BIN="$HOME/src/px/bin/Debug/net10.0"
+if [ -x "$PX_BIN/px" ] || [ -x "$PX_BIN/px.exe" ]; then
+    export PATH="$PX_BIN:$PATH"
+fi
 # ===== Git Functions =====
 gw() {
   if [ $# -eq 0 ]; then
@@ -84,12 +89,6 @@ fi
 
 if [ -f "$DOTFILES_DIR/functions/_fns4_back_and_diff.sh" ]; then
     source "$DOTFILES_DIR/functions/_fns4_back_and_diff.sh"
-fi
-
-# ===== px debug build =====
-PX_BIN="$HOME/src/px/bin/Debug/net10.0"
-if [ -x "$PX_BIN/px" ] || [ -x "$PX_BIN/px.exe" ]; then
-    export PATH="$PX_BIN:$PATH"
 fi
 
 if [ -f "$DOTFILES_DIR/functions/_fns4_cycod.sh" ]; then
