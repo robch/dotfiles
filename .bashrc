@@ -87,7 +87,15 @@ alias reloadbash='source ~/.bashrc'
 # Resolve the repo root from this file's location when DOTFILES_DIR is unset.
 if [ -z "${DOTFILES_DIR:-}" ]; then
     _dotfiles_source="${BASH_SOURCE[0]}"
-    DOTFILES_DIR="$(cd "$(dirname "$_dotfiles_source")" && pwd)"
+    while [ -L "$_dotfiles_source" ]; do
+        _dotfiles_link_dir="$(cd -P "$(dirname "$_dotfiles_source")" && pwd)"
+        _dotfiles_link_target="$(readlink "$_dotfiles_source")"
+        case "$_dotfiles_link_target" in
+            /*) _dotfiles_source="$_dotfiles_link_target" ;;
+            *) _dotfiles_source="$_dotfiles_link_dir/$_dotfiles_link_target" ;;
+        esac
+    done
+    DOTFILES_DIR="$(cd -P "$(dirname "$_dotfiles_source")" && pwd)"
 fi
 
 # ===== Dotfiles Scripts =====
