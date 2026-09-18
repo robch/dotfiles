@@ -9,11 +9,11 @@ export PS1='\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
 # .NET tools
 export PATH="$PATH:$HOME/.dotnet/tools"
 
-# ===== px debug build =====
 PX_BIN="$HOME/src/px/bin/Debug/net10.0"
 if [ -x "$PX_BIN/px" ] || [ -x "$PX_BIN/px.exe" ]; then
     export PATH="$PX_BIN:$PATH"
 fi
+
 # ===== Git Functions =====
 gw() {
   if [ $# -eq 0 ]; then
