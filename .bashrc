@@ -90,6 +90,19 @@ if [ -z "${DOTFILES_DIR:-}" ]; then
     DOTFILES_DIR="$(cd "$(dirname "$_dotfiles_source")" && pwd)"
 fi
 
+# ===== Dotfiles Scripts =====
+DOTFILES_SCRIPTS="$DOTFILES_DIR/scripts"
+if [ -d "$DOTFILES_SCRIPTS" ]; then
+    case ":$PATH:" in
+        *":$DOTFILES_SCRIPTS:"*) ;;
+        *) export PATH="$DOTFILES_SCRIPTS:$PATH" ;;
+    esac
+fi
+
+if [ -f "$DOTFILES_DIR/functions/_fns4_commands.sh" ]; then
+    source "$DOTFILES_DIR/functions/_fns4_commands.sh"
+fi
+
 if [ -f "$DOTFILES_DIR/functions/_fns4_back_and_diff.sh" ]; then
     source "$DOTFILES_DIR/functions/_fns4_back_and_diff.sh"
 fi

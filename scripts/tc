@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+exec px 'cycod*' "$@" --tree --contains CYCOD_ --all

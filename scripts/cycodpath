@@ -1,0 +1,60 @@
+#!/usr/bin/env bash
+
+# Dispatch to the first matching project-local scripts/cycodpath.
+# Search order:
+#   1. Explicit project-root argument
+#   2. Current directory
+#   3. ~/src/cycod-main3
+#   4. ~/src/cycod-main2
+#   5. ~/src/cycod-main
+#   6. ~/src/cycod
+
+set -u
+
+original_dir="$(pwd)"
+explicit_root="${1:-}"
+
+run_from_root() {
+    local root="$1"
+    shift
+
+    [ -f "$root/scripts/cycodpath" ] || return 1
+    [ -x "$root/scripts/cycodpath" ] || return 1
+
+    (
+        cd "$root" || exit 1
+        exec "$root/scripts/cycodpath" "$@"
+    )
+}
+
+if [ -n "$explicit_root" ] && [ -f "$explicit_root/scripts/cycodpath" ] && [ -x "$explicit_root/scripts/cycodpath" ]; then
+    explicit_root="$(cd "$explicit_root" && pwd)"
+    run_from_root "$explicit_root" "${@:2}"
+    exit $?
+fi
+
+if [ -f "scripts/cycodpath" ] && [ -x "scripts/cycodpath" ] && [ "$(cd "$(dirname "scripts/cycodpath")" && pwd)" != "$(cd "$(dirname "$0")" && pwd)" ]; then
+    run_from_root "$original_dir" "$@"
+    exit $?
+fi
+
+for root in \
+    "$HOME/src/cycod-main3" \
+    "$HOME/src/cycod-main2" \
+    "$HOME/src/cycod-main" \
+    "$HOME/src/cycod"; do
+    if [ -f "$root/scripts/cycodpath" ] && [ -x "$root/scripts/cycodpath" ]; then
+        run_from_root "$root" "$@"
+        exit $?
+    fi
+done
+
+echo "ERROR: Could not find scripts/cycodpath" >&2
+echo "Searched:" >&2
+echo "  - Explicit path (if provided): ${explicit_root:-<none>}/scripts/cycodpath" >&2
+echo "  - Current directory: $original_dir/scripts/cycodpath" >&2
+echo "  - $HOME/src/cycod-main3/scripts/cycodpath" >&2
+echo "  - $HOME/src/cycod-main2/scripts/cycodpath" >&2
+echo "  - $HOME/src/cycod-main/scripts/cycodpath" >&2
+echo "  - $HOME/src/cycod/scripts/cycodpath" >&2
+exit 1

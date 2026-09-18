@@ -1,0 +1,39 @@
+#!/usr/bin/env bash
+
+usage() {
+    echo "Usage: k PID_OR_NAME [PID_OR_NAME ...]"
+    echo
+    echo "Terminate each process identified by PID or name."
+}
+
+if [ "$#" -eq 0 ]; then
+    usage >&2
+    exit 1
+fi
+
+case "$1" in
+    -h|--help|/?)
+        usage
+        exit 0
+        ;;
+esac
+
+status=0
+for target in "$@"; do
+    if [[ "$target" =~ ^[0-9]+$ ]]; then
+        kill "$target" 2>/dev/null || {
+            echo "Could not terminate PID: $target" >&2
+            status=1
+        }
+    elif command -v pkill >/dev/null 2>&1; then
+        pkill -f -- "$target" 2>/dev/null || {
+            echo "No matching process or permission denied: $target" >&2
+            status=1
+        }
+    else
+        echo "Error: pkill is required for process names." >&2
+        status=1
+    fi
+done
+
+exit "$status"
