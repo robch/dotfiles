@@ -24,3 +24,7 @@ Thumbs.db
 *.backup
 *.bak
 *.jsonl
+
+# Cycod diagnostic logs
+*.cycod.log
+*.cycodmd.log

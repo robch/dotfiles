@@ -1,9 +1,3 @@
-# Ensure shell scripts always use Unix line endings (LF), regardless of the
-# platform or the developer's local core.autocrlf setting. Without this,
-# Windows checkouts (e.g. core.autocrlf=true) can smudge these files to CRLF,
-# which breaks shebangs and script execution under bash/sh/WSL/CI.
-*.sh    text eol=lf
-
-# Dotfiles/shell config are also sourced by bash - keep them LF too.
-.bashrc         text eol=lf
-.bash_profile   text eol=lf
+# Store text files with LF and check them out with LF on every platform.
+# Binary files are left unchanged by text=auto.
+* text=auto eol=lf
