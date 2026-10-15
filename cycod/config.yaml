@@ -1,0 +1,7 @@
+# Shared cycod spot. Link to it from a user spot with:
+#   use:
+#     - github: robch/dotfiles
+#       path: cycod
+# NEVER put secrets (API keys, tokens) in this folder; this repo is public.
+App:
+  AutoSaveLog: true

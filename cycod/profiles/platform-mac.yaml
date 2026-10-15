@@ -1,0 +1,3 @@
+# Switched on automatically on macOS.
+App:
+  AutoSaveLogFolder: ~/temp/cycod-logs-mac

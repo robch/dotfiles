@@ -1,0 +1,3 @@
+# Switched on automatically on Windows.
+App:
+  AutoSaveLogFolder: c:\temp\cycod-logs

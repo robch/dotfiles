@@ -1,0 +1,3 @@
+# Switched on automatically on Linux (and WSL, which also gets platform-wsl).
+App:
+  AutoSaveLogFolder: ~/temp/cycod-logs-linux
